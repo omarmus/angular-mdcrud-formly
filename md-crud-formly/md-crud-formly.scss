@@ -1,0 +1,149 @@
+.bg-success {
+    // color: lighten($colorSuccess, 10%);
+    color: lighten(green, 15%);
+}
+.bg-gray {
+    color: #aaaaaa;
+}
+
+.formly-column-1 {
+    .formly-field-datepicker {
+        margin-bottom: 20px;
+    }
+}
+.crud-table-filter {
+    border: medium none;
+    line-height: 36px;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.formly-column-2 {
+    max-width: 640px;
+    width: 100%;
+
+    .formly-field {
+        box-sizing: border-box;
+        display: inline-block;
+        margin-bottom: 0;
+        padding: 0 10px;
+        vertical-align: top;
+        width: 50%;
+    }
+}
+
+.formly-column-2,
+.formly-column-3,
+.formly-column-4
+{
+    .formly-field-datepicker {
+
+        label {
+            display: block;
+            font-size: 11px !important;
+            margin: -13px 0 -2px 2px;           
+        }
+
+        .md-datepicker-input-container {
+            padding-bottom: 0;
+        }
+    }
+
+    .md-datepicker-container {
+        label {
+            display: block;
+            font-size: 11px !important;     
+        }
+    }
+
+    .formly-field-datepicker {
+        height: 70px;
+    }
+}
+
+.formly-column-3 {
+    max-width: 850px;
+    width: 100%;
+
+    .formly-field {
+        box-sizing: border-box;
+        display: inline-block;
+        margin-bottom: 0;
+        padding: 0 10px;
+        vertical-align: top;
+        width: 33.3%;
+    }
+}
+
+.formly-column-4 {
+    max-width: 960px;
+    width: 100%;
+
+    .formly-field {
+        box-sizing: border-box;
+        display: inline-block;
+        margin-bottom: 0;
+        padding: 0 10px;
+        vertical-align: top;
+        width: 25%;
+    }
+}
+
+.formly-dialog {
+    .md-dialog-content {
+        padding: 10px;
+    }
+}
+
+.formly {
+
+    .formly-field-select {
+        margin-bottom: 20px;
+    }
+
+    & > div:first-child {
+        display: none;
+    }
+}
+
+md-dialog .md-actions, md-dialog md-dialog-actions {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.md-input-has-value {
+    margin-bottom: 10px;
+}
+
+.formly-table-editable {
+    md-input-container {
+        .md-errors-spacer {
+            display: none;
+        }
+        label {
+            color: #bbb !important;
+            font-size: 0.8rem !important;
+        }
+
+        &.md-default-theme.md-input-focused:not(.md-input-invalid) label, 
+        &.md-input-focused:not(.md-input-invalid) label,
+        &.md-input-focused label:not(.md-no-float), 
+        &.md-input-has-placeholder label:not(.md-no-float), 
+        &.md-input-has-value label:not(.md-no-float) { 
+            display: none;
+        }
+    }
+
+}
+md-select-menu {
+    label {
+        font-size: .8rem;
+        text-align: center;
+        display: block;
+        color: #777;
+    }
+}
+.md-datepicker-input {
+    font-family: Poppins;
+    font-size: 13px;
+}

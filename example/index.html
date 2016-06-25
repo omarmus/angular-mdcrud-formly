@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <title>Angular md-crud-formly Example</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+    <div ng-controller="MainController as vm">
+        <md-crud-formly url="vm.url" 
+                        title-table="vm.title" 
+                        template="vm.template"
+                        fields="vm.fields" 
+                        column="vm.column" 
+                        formly="vm.formly" 
+                        permission="vm.permission" 
+                        editable="vm.editable" 
+                        order="vm.order" 
+                        dialog-controller="vm.dialogController" 
+                        event-save="vm.eventSave" 
+                        fks="vm.fks"">
+        </md-crud-formly>
+    </div>
+
+    <!-- <script src="../bower_components/jquery/dist/jquery.js"></script> -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <!-- <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="../bower_components/angular-touch/angular-touch.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.js"></script>
+    <script src="../bower_components/angular-aria/angular-aria.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script> -->
+    <script src="../bower_components/angular-material/angular-material.js"></script>
+    <!-- <script src="../bower_components/malarkey/dist/malarkey.min.js"></script> -->
+    <!-- <script src="../bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script> -->
+    <!-- <script src="../bower_components/moment/moment.js"></script> -->
+    <script src="../bower_components/angular-material-data-table/dist/md-data-table.js"></script>
+    <!-- <script src="../bower_components/api-check/dist/api-check.js"></script> -->
+    <script src="../bower_components/angular-formly/dist/formly.js"></script>
+    <script src="../bower_components/angular-formly-material/dist/formly-material.js"></script>    
+</body>
+</html>

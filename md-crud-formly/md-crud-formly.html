@@ -1,0 +1,128 @@
+<md-card>            
+    <md-toolbar class="md-table-toolbar md-default" ng-show="vm.filter.show">
+        <div class="md-toolbar-tools">
+            <md-icon>search</md-icon>
+            <form flex name="vm.filter.form">
+                <input type="text" class="crud-table-filter" id="crud-table-input" ng-model="vm.query.filter" ng-model-options="vm.filter.options" placeholder="Escriba su búsqueda aquí...">
+            </form>
+            <md-button class="md-icon-button" ng-click="vm.removeFilter()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-toolbar class="md-table-toolbar" ng-show="!vm.filter.show">
+        <div class="md-toolbar-tools">
+            <md-icon>grid_on</md-icon> <span>{{vm.titleTable}}</span>
+            <div flex></div>
+            <md-button class="md-icon-button" ng-click="vm.showFilter()">
+                <md-tooltip>Filtrar registros</md-tooltip>
+                <md-icon>filter_list</md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="vm.saveAll()" ng-if="vm.editable">
+                <md-tooltip>Guardar todo</md-tooltip>
+                <md-icon>playlist_add_check</md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="vm.getItems()">
+                <md-tooltip>Actualizar</md-tooltip>
+                <md-icon>refresh</md-icon>
+            </md-button>
+            <md-button class="md-icon-button btn-collapsed">
+                <md-tooltip>Ocultar/Ver</md-tooltip>
+                <md-icon>keyboard_arrow_down</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-card-content>
+        <div class="btn-container" ng-if="vm.permissions.create">
+            <md-button class="md-fab md-primary" ng-click="vm.add($event)" aria-label="Add">
+                <md-tooltip>Agregar nuevo registro</md-tooltip>
+                <md-icon>add</md-icon>
+            </md-button>
+        </div>
+        <md-table-container>
+            <table md-table ng-model="selected" md-progress="promise"  ng-if="vm.permissions.read">
+                <thead md-head md-order="vm.query.order" md-on-reorder="vm.getItems">
+                    <tr md-row>
+                        <th md-column class="text-center">Acciones</th>
+                        <th ng-repeat="header in vm.headers" md-column ng-if="header.name != 'id'" md-order-by="{{header.order ? header.name : ''}}">
+                            <span>{{header.title}}</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody md-body class="{{vm.editable ? 'formly-table-editable' : ''}}">
+                    <tr md-row md-select="item" ng-repeat="item in vm.items.data">
+                        <td md-cell class="text-center md-table-options">
+                            <md-button class="md-icon-button" aria-label="Editar" ng-click="vm.edit($event, item.id)" ng-if="vm.permissions.update && !vm.editable">
+                                <md-tooltip>Editar</md-tooltip>
+                                <md-icon>mode_edit</md-icon></md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" aria-label="Editar" ng-click="vm.save(item)" ng-if="vm.permissions.update && vm.editable">
+                                <md-tooltip>Guardar registro</md-tooltip>
+                                <md-icon>check</md-icon></md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" aria-label="Editar" ng-click="vm.print($event, item.id)" ng-if="vm.permissions.print">
+                                <md-tooltip>Imprimir</md-tooltip>
+                                <md-icon>print</md-icon></md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button md-accent" aria-label="Eliminar" ng-click="vm.delete($event, item.id)" ng-if="vm.permissions.delete">
+                                <md-tooltip>Eliminar</md-tooltip>
+                                <md-icon>delete</md-icon></md-icon>
+                            </md-button>
+                        </td>
+                        <td md-cell ng-repeat="(key, value) in item" ng-if="key != 'id'">
+                            <div ng-if="vm.editable">
+                                <div ng-switch on="vm.types[key].type">
+                                    <div ng-switch-when="input">
+                                        <md-input-container>
+                                            <label>{{vm.types[key].templateOptions.label}}</label>
+                                            <input ng-model="vm.dataGrid[value]">
+                                        </md-input-container>
+                                    </div>
+                                    <div ng-switch-when="textarea">
+                                        <md-input-container>
+                                            <label>{{vm.types[key].templateOptions.label}}</label>
+                                            <textarea ng-model="vm.dataGrid[value]"></textarea>
+                                        </md-input-container>
+                                    </div>
+                                    <div ng-switch-when="select">
+                                        <md-input-container>
+                                            <md-select ng-model="vm.dataGrid[value]">
+                                                <label>{{vm.types[key].templateOptions.label}}</label>
+                                                <md-option ng-repeat="option in vm.types[key].templateOptions.options" value="{{option.value}}">
+                                                    {{option.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div ng-switch-when="checkbox">
+                                        <md-checkbox ng-model="vm.dataGrid[value]" aria-label="{{vm.types[key].templateOptions.label}}"></md-checkbox>
+                                    </div>
+                                    <div ng-switch-when="datepicker">
+                                        <md-datepicker ng-model="vm.dataGrid[value]" md-placeholder="{{vm.types[key].templateOptions.label}}"></md-datepicker>
+                                    </div>
+                                    <div ng-switch-default>
+                                        {{value}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="!vm.editable">
+                                <div ng-switch on="value">
+                                    <div ng-switch-when="check_circle_success">
+                                        <md-icon class="bg-success">check_circle</md-icon>
+                                    </div>
+                                    <div ng-switch-when="check_circle_gray">
+                                        <md-icon class="bg-gray">check_circle</md-icon>
+                                    </div>
+                                    <div ng-switch-default>
+                                        {{value}}
+                                    </div>
+                                </div>                                
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="vm.query.limit" md-limit-options="vm.limitOptions" md-page="vm.query.page" md-total="{{vm.items.count}}" md-page-select="vm.options.pageSelect" md-boundary-links="vm.options.boundaryLinks" md-on-paginate="vm.getItems"></md-table-pagination>
+    </md-card-content>
+</md-card>
